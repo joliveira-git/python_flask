@@ -1,2 +1,2 @@
 # python_flask
-API REST with Flask
+REST API with Flask
