@@ -1,8 +1,9 @@
+from typing import List
 from src.domain.models import Users
 from src.infra.config import DBConnectionHandler
 from src.infra.entities import Users as UsersModel
 
-class userRepository:
+class UserRepository:
     """Class to manage User Repository"""
 
     @classmethod
@@ -24,4 +25,32 @@ class userRepository:
                 raise
             finally:
                 db_connection.session.close()
+        return None
+
+    @classmethod
+    def select_user(cls, user_id: int = None, name: str = None) -> List[Users]:
+        """
+        Select data in user entity by id and/or name
+        :param - user_id: Id of the registry
+               - name: User's name
+        :return: - List with Users selected
+        """
+        try:
+            query_data = None
+            filters = {}
+            if user_id:
+                filters['id'] = user_id
+            if name:
+                filters['name'] = name
+
+            if filters:
+                with DBConnectionHandler() as db_connection:
+                    data = db_connection.session.query(UsersModel).filter_by(**filters).all()
+                    query_data = [data]
+            return query_data
+        except:
+            db_connection.session.rollback()
+            raise
+        finally:
+            db_connection.session.close()
         return None
