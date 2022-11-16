@@ -1,3 +1,3 @@
 from collections import namedtuple
 
-Pets = namedtuple("Pets", "id name specie age user_id")
+Pets = namedtuple("Pets", "id, name, specie, age, user_id")

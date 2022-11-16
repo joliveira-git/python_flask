@@ -1,3 +1,4 @@
+from typing import List
 from src.domain.models import Pets
 from src.infra.config import DBConnectionHandler
 from src.infra.entities import Pets as PetsEntity
@@ -5,6 +6,7 @@ from src.infra.entities import Pets as PetsEntity
 class PetRepository:
     """Class tom manage Pet Repository"""
 
+    @classmethod
     def insert_pet(self, name: str, specie: str, age: int, user_id: int) -> Pets:
         """
         Insert data in Pet entity
@@ -34,4 +36,32 @@ class PetRepository:
             finally:
                 db_connection.session.close()
 
+        return None
+
+    @classmethod
+    def select_pet(cls, pet_id: int = None, user_id: int = None) -> List[Pets]:
+        """
+        Select data in PetsEntity entity by id and/or user_id
+        :param pet_id: Id of the pet registry
+        :param user_id: Id of the owner
+        :return: List with Pets selected
+        """
+        try:
+            query_data = None
+            filters = {}
+            if pet_id:
+                filters['id'] = pet_id
+            if user_id:
+                filters['user_id'] = user_id
+
+            if filters:
+                with DBConnectionHandler() as db_connection:
+                    data = db_connection.session.query(PetsEntity).filter_by(**filters).all()
+                    query_data = [data]
+            return query_data
+        except:
+            db_connection.session.rollback()
+            raise
+        finally:
+            db_connection.session.close()
         return None
