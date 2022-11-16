@@ -1,9 +1,10 @@
 from typing import List
+from src.data.interfaces.user_repository_interface import UserRepositoryInterface
 from src.domain.models import Users
 from src.infra.config import DBConnectionHandler
-from src.infra.entities import Users as UsersModel
+from src.infra.entities import Users as UsersEntity
 
-class UserRepository:
+class UserRepository(UserRepositoryInterface):
     """Class to manage User Repository"""
 
     @classmethod
@@ -16,7 +17,7 @@ class UserRepository:
 
         with DBConnectionHandler() as db_connection:
             try:
-                new_user = UsersModel(name=name, password=password)
+                new_user = UsersEntity(name=name, password=password)
                 db_connection.session.add(new_user)
                 db_connection.session.commit()
                 return Users(id=new_user.id,name=new_user.name, password=new_user.password)
@@ -45,7 +46,7 @@ class UserRepository:
 
             if filters:
                 with DBConnectionHandler() as db_connection:
-                    data = db_connection.session.query(UsersModel).filter_by(**filters).all()
+                    data = db_connection.session.query(UsersEntity).filter_by(**filters).all()
                     query_data = [data]
             return query_data
         except:
