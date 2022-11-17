@@ -1,0 +1,1 @@
+from src.data.register_user.register import RegisterUser

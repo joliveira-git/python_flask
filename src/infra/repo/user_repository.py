@@ -25,7 +25,8 @@ class UserRepository(UserRepositoryInterface):
                 db_connection.session.rollback()
                 raise
             finally:
-                db_connection.session.close()
+                if db_connection:
+                    db_connection.session.close()
         return None
 
     @classmethod
