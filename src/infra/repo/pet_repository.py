@@ -25,7 +25,7 @@ class PetRepository(PetRepositoryInterface):
                 db_connection.session.commit()
 
                 return Pets(
-                    id = new_pet.id,
+                    id=new_pet.id,
                     name=new_pet.name,
                     specie=new_pet.specie.value,
                     age=new_pet.age,
@@ -64,5 +64,6 @@ class PetRepository(PetRepositoryInterface):
             db_connection.session.rollback()
             raise
         finally:
-            db_connection.session.close()
+            if db_connection:
+                db_connection.session.close()
         return None
