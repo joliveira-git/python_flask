@@ -3,7 +3,7 @@ from typing import Dict, List
 from src.domain.models import Users
 
 class FindUser(ABC):
-    """Interface to FindPet use case"""
+    """Interface to FindUser use case"""
 
     @classmethod
     def by_id(cls, user_id: int) -> Dict[bool, List[Users]]:
