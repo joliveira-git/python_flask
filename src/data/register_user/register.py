@@ -7,19 +7,19 @@ from src.data.interfaces import UserRepositoryInterface as UserRepository
 class RegisterUser(RegisterUserInterface):
     """Class to define usecase: Register User"""
     def __init__(self, user_repository: Type[UserRepository]):
-        self.user_repository = user_repository
+        self.__user_repository = user_repository
 
     def register(self, name: str, password: str) -> Dict[bool, Users]:
         """
         Register user use case
-        :param - name: person name
-               - password: password of the person
-        :return: Dictionary with informations of the process
+        :param name: person name
+        :param password: password of the person
+        :return Dictionary with informations of the process
         """
         response = None
         validate_entry = isinstance(name, str) and isinstance(password, str)
 
         if validate_entry:
-            response = self.user_repository.insert_user(name,password)
+            response = self.__user_repository.insert_user(name,password)
 
         return {"Success": validate_entry, "Data": response}

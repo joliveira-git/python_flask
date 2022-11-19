@@ -11,8 +11,8 @@ class FindPet(FindPetInterface):
     def by_pet_id(self, pet_id: int) -> Dict[bool, List[Pets]]:
         """
         Select pet by id
-        :param - pet_id: id of the pet
-        :return - dictionary with informations of the process
+        :param pet_id: id of the pet
+        :return dictionary with informations of the process
         """
         response = None
         validate_entry = isinstance(pet_id, int)
@@ -24,8 +24,8 @@ class FindPet(FindPetInterface):
     def by_user_id(self, user_id: int) -> Dict[bool, List[Pets]]:
         """
         Select pet by user_id
-        :param - user_id: id of the user owner of the pet
-        :return - dictionary with informations of the process
+        :param user_id: id of the user owner of the pet
+        :return dictionary with informations of the process
         """
         response = None
         validate_entry = isinstance(user_id, str)
@@ -37,9 +37,9 @@ class FindPet(FindPetInterface):
     def by_pet_id_and_user_id(self, pet_id: int, user_id: str) -> Dict[bool, List[Pets]]:
         """
         Select pet by pet_id and user_id
-        :param - pet_id: id of the pet
-               - user_id: id of the user
-        :return - dictionary with informations of the process
+        :param pet_id: id of the pet
+        :param user_id: id of the user
+        :return dictionary with informations of the process
         """
         response = None
         validate_entry = isinstance(pet_id, int) and isinstance(user_id, int)

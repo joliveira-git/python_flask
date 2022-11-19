@@ -11,11 +11,11 @@ class PetRepository(PetRepositoryInterface):
     def insert_pet(self, name: str, specie: str, age: int, user_id: int) -> Pets:
         """
         Insert data in Pet entity
-        :param - name: name of the pet
-            - specie: enum with species acepted
-            - age: pet age
-            - user_id: id of the owner (FK)
-        :return - tuple with new pet inserted
+        :param name: name of the pet
+        :param specie: enum with species acepted
+        :param age: pet age
+        :param user_id: id of the owner (FK)
+        :return tuple with new pet inserted
         """
 
         with DBConnectionHandler() as db_connection:

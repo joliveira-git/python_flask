@@ -10,9 +10,9 @@ class UserRepository(UserRepositoryInterface):
     @classmethod
     def insert_user(cls, name: str, password: str) -> Users:
         """ insert data in user entity
-            :param - name: person name
-                   - password: user password
-           :return - tuple with new user inserted
+            :param name: person name
+            :param password: user password
+            :return tuple with new user inserted
         """
 
         with DBConnectionHandler() as db_connection:
@@ -33,9 +33,9 @@ class UserRepository(UserRepositoryInterface):
     def select_user(cls, user_id: int = None, name: str = None) -> List[Users]:
         """
         Select data in user entity by id and/or name
-        :param - user_id: Id of the registry
-               - name: User's name
-        :return: - List with Users selected
+        :param user_id: Id of the registry
+        :param name: User's name
+        :return List with Users selected
         """
         try:
             query_data = None
