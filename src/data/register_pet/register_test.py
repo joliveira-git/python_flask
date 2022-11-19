@@ -34,7 +34,7 @@ def test_registry():
     assert pet_repo.insert_pet_params["age"] == attributes["age"]
     print(pet_repo.insert_pet_params)
     assert find_user.by_id_and_name_param["user_id"] == attributes["user_information"]["user_id"]
-    assert find_user.by_id_and_name_param["name"] == attributes["user_information"]["user_name"]
+    assert find_user.by_id_and_name_param["user_name"] == attributes["user_information"]["user_name"]
 
     assert response["Success"] is True
     assert response["Data"]

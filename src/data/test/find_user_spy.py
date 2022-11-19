@@ -23,7 +23,7 @@ class FindUserSpy:
 
     def by_name(self, name: str) -> Dict[bool, List[Users]]:
         """Select user by name"""
-        self.by_name_param["name"] = name
+        self.by_name_param["user_name"] = name
         response = None
         validate_entry = isinstance(name, str)
         if validate_entry:
@@ -34,7 +34,7 @@ class FindUserSpy:
     def by_id_and_name(self, user_id: int, name: str) -> Dict[bool, List[Users]]:
         """Select user by id and name"""
         self.by_id_and_name_param["user_id"] = user_id
-        self.by_id_and_name_param["name"] = name
+        self.by_id_and_name_param["user_name"] = name
         response = None
         validate_entry = isinstance(user_id, int) and isinstance(name, str)
         if validate_entry:
