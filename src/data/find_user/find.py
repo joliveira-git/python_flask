@@ -11,8 +11,8 @@ class FindUser(FindUserInterface):
     def by_id(self, user_id: int) -> Dict[bool, List[Users]]:
         """
         Select user by id
-        :param - user_id: id of the user
-        :return - dictionary with informations of the process
+        :param user_id: id of the user
+        :return dictionary with informations of the process
         """
         response = None
         validate_entry = isinstance(user_id, int)
@@ -24,8 +24,8 @@ class FindUser(FindUserInterface):
     def by_name(self, name: str) -> Dict[bool, List[Users]]:
         """
         Select user by name
-        :param - name: name of the user
-        :return - dictionary with informations of the process
+        :param name: name of the user
+        :return dictionary with informations of the process
         """
         response = None
         validate_entry = isinstance(name, str)
@@ -37,9 +37,9 @@ class FindUser(FindUserInterface):
     def by_id_and_name(self, user_id: int, name: str) -> Dict[bool, List[Users]]:
         """
         Select user by id and name
-        :param - user_id: id of the user
-               - name: name of the user
-        :return - dictionary with informations of the process
+        :param user_id: id of the user
+        :param name: name of the user
+        :return dictionary with informations of the process
         """
         response = None
         validate_entry = isinstance(user_id, int) and isinstance(name, str)
