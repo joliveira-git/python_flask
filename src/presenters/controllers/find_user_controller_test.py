@@ -13,7 +13,7 @@ def test_handler():
     find_user_controller = FindUserController(find_user_use_case)
 
     http_request = HttpRequest(query={"user_id": faker.random_number(), "user_name": faker.word()})
-    response = find_user_controller.handle(http_request)
+    response = find_user_controller.route(http_request)
 
     assert find_user_use_case.by_id_and_name_param["user_id"] == http_request.query["user_id"]
     assert find_user_use_case.by_id_and_name_param["user_name"] == http_request.query["user_name"]
@@ -27,7 +27,7 @@ def test_handler_no_query_param_fail():
     find_user_controller = FindUserController(find_user_use_case)
 
     http_request = HttpRequest()
-    response = find_user_controller.handle(http_request)
+    response = find_user_controller.route(http_request)
 
     assert find_user_use_case.by_id_and_name_param == {}
     assert find_user_use_case.by_id_param == {}
@@ -43,7 +43,7 @@ def test_handler_invalid_query_param_fail():
     find_user_controller = FindUserController(find_user_use_case)
 
     http_request = HttpRequest(query={"fake": 'fake'})
-    response = find_user_controller.handle(http_request)
+    response = find_user_controller.route(http_request)
 
     assert find_user_use_case.by_id_and_name_param == {}
     assert find_user_use_case.by_id_param == {}
