@@ -19,5 +19,10 @@ def flask_adapter(request: any, api_route: Type[Route]) -> any:
         return HttpResponse(
             status_code=http_error["status_code"], body=http_error["body"]
         )
+    except Exception:
+        http_error = HttpErrors.error_400()
+        return HttpResponse(
+            status_code=http_error["status_code"], body=http_error["body"]
+        )
 
     return response
