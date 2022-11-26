@@ -1,12 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from src.main.configs.config import DevelopmentConfig
+
 
 class DBConnectionHandler:
     """Sqlalchemy database connection"""
 
-    def __init__(self):
-        self.__connection_string = "sqlite:///storage.db"
+    def __init__(self, connection_string=DevelopmentConfig.SQLALCHEMY_DATABASE_URI):
+        self.__connection_string = connection_string
         self.session = None
 
     def get_engine(self):
