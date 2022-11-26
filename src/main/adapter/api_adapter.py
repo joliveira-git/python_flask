@@ -14,12 +14,12 @@ def flask_adapter(request: any, api_route: Type[Route]) -> any:
     http_request = HttpRequest(body=request.json)
     try:
         response = api_route.route(http_request)
-    except IntegrityError:
+    except IntegrityError as e:
         http_error = HttpErrors.error_409()
         return HttpResponse(
             status_code=http_error["status_code"], body=http_error["body"]
         )
-    except Exception:
+    except Exception as e:
         http_error = HttpErrors.error_400()
         return HttpResponse(
             status_code=http_error["status_code"], body=http_error["body"]

@@ -5,13 +5,13 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "sqlite:///storage.db"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///mypet.sqlite"
 
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///storage_test.db"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///mypet_test.sqlite"
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "sqlite:///storage.db"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///mypet.sqlite"

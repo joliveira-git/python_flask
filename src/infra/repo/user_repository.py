@@ -1,4 +1,6 @@
 from typing import List
+
+from src import db
 from src.data.interfaces.user_repository_interface import UserRepositoryInterface
 from src.domain.models import Users
 from src.infra.config import DBConnectionHandler
@@ -15,19 +17,14 @@ class UserRepository(UserRepositoryInterface):
             :return tuple with new user inserted
         """
 
-        with DBConnectionHandler() as db_connection:
-            try:
-                new_user = UsersEntity(name=name, password=password)
-                db_connection.session.add(new_user)
-                db_connection.session.commit()
-                return Users(id=new_user.id,name=new_user.name, password=new_user.password)
-            except:
-                db_connection.session.rollback()
-                raise
-            finally:
-                if db_connection:
-                    db_connection.session.close()
-        return None
+        try:
+            new_user = UsersEntity(name=name, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            return Users(id=new_user.id,name=new_user.name, password=new_user.password)
+        except:
+            db.session.rollback()
+            raise
 
     @classmethod
     def select_user(cls, user_id: int = None, name: str = None) -> List[Users]:

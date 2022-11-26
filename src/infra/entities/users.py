@@ -1,17 +1,16 @@
-from sqlalchemy import Column, String, Integer
-from sqlalchemy.orm import relationship
-from src.infra.config import Base
+from src import db
 
-
-class Users(Base):
+Column = db.Column
+Model = db.Model
+class Users(Model):
     """Users Entity"""
 
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False, unique=True)
-    password = Column(String, nullable=False)
-    id_pet = relationship("Pets")
+    id = Column(db.Integer, primary_key=True)
+    name = Column(db.String, nullable=False, unique=True)
+    password = Column(db.String, nullable=False)
+    id_pet = db.relationship("Pets")
 
     def __repr__(self):
         return f"Usr [name={self.name}"

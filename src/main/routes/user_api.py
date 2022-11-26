@@ -24,14 +24,16 @@ class UserList(Resource):
                 "id": response.body.id,
                 "atributes": {"name": response.body.name}
             }
-            return jsonify({"data": message}), response.status_code
-        return jsonify({
-            "error": {
-                "status": response.status_code,
-                "title": response.body["error"]
-            }
-        }), response.status_code
+            response = {"data": message}, response.status_code
+        else:
+            response = {
+                "error": {
+                    "status": response.status_code,
+                    "title": response.body["error"]
+                }
+            }, response.status_code
 
+        return response
 
 class User(Resource):
     def get(self, user_id):
