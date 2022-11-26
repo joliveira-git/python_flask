@@ -3,8 +3,8 @@ from typing import List
 from src import db
 from src.data.interfaces.user_repository_interface import UserRepositoryInterface
 from src.domain.models import Users
-from src.infra.config import DBConnectionHandler
 from src.infra.entities import Users as UsersEntity
+
 
 class UserRepository(UserRepositoryInterface):
     """Class to manage User Repository"""
@@ -43,13 +43,10 @@ class UserRepository(UserRepositoryInterface):
                 filters['name'] = name
 
             if filters:
-                with DBConnectionHandler() as db_connection:
-                    data = db_connection.session.query(UsersEntity).filter_by(**filters).all()
-                    query_data = [data]
+                data = db.session.query(UsersEntity).filter_by(**filters).all()
+                query_data = [data]
             return query_data
         except:
-            db_connection.session.rollback()
+            db.session.rollback()
             raise
-        finally:
-            db_connection.session.close()
         return None

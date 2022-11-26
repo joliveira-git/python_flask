@@ -15,3 +15,10 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///mypet.sqlite"
+
+config = {
+    'dev': DevelopmentConfig,
+    'prod': ProductionConfig,
+    'default': DevelopmentConfig,
+    'test': TestingConfig
+}

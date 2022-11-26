@@ -1,9 +1,11 @@
 from flask import Flask
+
+from src.main.configs.config import config
 from src.main.midlewares import db, ma
 
-def create_app():
+def create_app(config_name=None):
     app = Flask(__name__)
-    app.config.from_object("src.main.configs.config.DevelopmentConfig")
+    app.config.from_object(config.get(config_name or 'default'))
 
     register_extensions(app)
 
