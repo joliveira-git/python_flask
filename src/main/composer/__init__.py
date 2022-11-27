@@ -1,1 +1,1 @@
-from .register_user_composite import register_user_composer
+from .register_user_composite import register_user_composer, find_user_composer

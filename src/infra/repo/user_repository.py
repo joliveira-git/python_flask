@@ -35,7 +35,6 @@ class UserRepository(UserRepositoryInterface):
         :return List with Users selected
         """
         try:
-            query_data = None
             filters = {}
             if user_id:
                 filters['id'] = user_id
@@ -44,8 +43,7 @@ class UserRepository(UserRepositoryInterface):
 
             if filters:
                 data = db.session.query(UsersEntity).filter_by(**filters).all()
-                query_data = [data]
-            return query_data
+            return data
         except:
             db.session.rollback()
             raise

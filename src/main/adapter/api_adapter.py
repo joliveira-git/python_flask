@@ -11,7 +11,8 @@ def flask_adapter(request: any, api_route: Type[Route]) -> any:
     :param api_route: Composite routes
     :return: Anything
     """
-    http_request = HttpRequest(body=request.json)
+    http_request = HttpRequest(body=request.json if request.is_json else None, query=request.view_args)
+
     try:
         response = api_route.route(http_request)
     except IntegrityError as e:

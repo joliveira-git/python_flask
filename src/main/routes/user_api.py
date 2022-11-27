@@ -2,7 +2,8 @@ from flask import jsonify, request
 from flask_restx import Namespace, Resource, fields
 
 from src.main.adapter import flask_adapter
-from src.main.composer import register_user_composer
+from src.main.composer import register_user_composer, find_user_composer
+from src.main.serializer.user_serializer import UserSerializer
 
 users_api_ns = Namespace("users", description="pets owner")
 user_fields = users_api_ns.model(
@@ -19,12 +20,8 @@ class UserList(Resource):
         """register user route"""
         response = flask_adapter(request=request, api_route=register_user_composer())
         if response.status_code < 300:
-            message = {
-                "type": "users",
-                "id": response.body.id,
-                "atributes": {"name": response.body.name}
-            }
-            response = {"data": message}, response.status_code
+            data = UserSerializer.serializer([response.body])
+            response = {"data": data}, response.status_code
         else:
             response = {
                 "error": {
@@ -38,7 +35,19 @@ class UserList(Resource):
 class User(Resource):
     def get(self, user_id):
         """Get an user by ID"""
-        # return get_article(user_id)
+        response = flask_adapter(request=request, api_route=find_user_composer())
+        if response.status_code < 300:
+            data = UserSerializer.serializer(response.body)
+            response = {"data": data}, response.status_code
+        else:
+            response = {
+                "error": {
+                    "status": response.status_code,
+                    "title": response.body["error"]
+                }
+            }, response.status_code
+
+        return response
 
     @users_api_ns.doc(body=user_fields)
     def put(self, user_id):
