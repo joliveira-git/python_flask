@@ -5,14 +5,14 @@ from src.main.adapter import flask_adapter
 from src.main.composer import register_pet_composer, find_pet_composer
 from src.main.serializer.pets_serializer import PetsSerializer
 
-pets_api_ns = Namespace("pets", description="pets owner")
+pets_api_ns = Namespace("pets", description="pets")
 pet_fields = pets_api_ns.model(
-    "Pet", {"name": fields.String, "password": fields.String}
+    "Pet", {"id": fields.Integer, "name": fields.String, "specie": fields.String, "age": fields.Integer, "user_id": fields.Integer}
 )
 
 class PetList(Resource):
     def get(self):
-        """Get a list of articles"""
+        """Get a list of pets"""
         # return get_all_articles()
 
     @pets_api_ns.doc(body=pet_fields)

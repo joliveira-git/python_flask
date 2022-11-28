@@ -12,7 +12,7 @@ user_fields = users_api_ns.model(
 
 class UserList(Resource):
     def get(self):
-        """Get a list of articles"""
+        """Get a list of users"""
         # return get_all_articles()
 
     @users_api_ns.doc(body=user_fields)
