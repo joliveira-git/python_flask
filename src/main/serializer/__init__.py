@@ -1,1 +1,2 @@
-from .user_serializer import UserSerializer
+from .users_serializer import UsersSerializer
+from .pets_serializer import PetsSerializer

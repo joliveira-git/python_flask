@@ -3,10 +3,10 @@ from typing import List
 from src.domain.models import Users
 
 
-class UserSerializer:
+class UsersSerializer:
 
     @staticmethod
-    def serializer(users:List[Users]):
+    def serializer(users: List[Users]):
         result = []
         for user in users:
             result.append(

@@ -3,7 +3,7 @@ from flask_restx import Namespace, Resource, fields
 
 from src.main.adapter import flask_adapter
 from src.main.composer import register_user_composer, find_user_composer
-from src.main.serializer.user_serializer import UserSerializer
+from src.main.serializer.users_serializer import UsersSerializer
 
 users_api_ns = Namespace("users", description="pets owner")
 user_fields = users_api_ns.model(
@@ -20,7 +20,7 @@ class UserList(Resource):
         """register user route"""
         response = flask_adapter(request=request, api_route=register_user_composer())
         if response.status_code < 300:
-            data = UserSerializer.serializer([response.body])
+            data = UsersSerializer.serializer([response.body])
             response = {"data": data}, response.status_code
         else:
             response = {
@@ -37,7 +37,7 @@ class User(Resource):
         """Get an user by ID"""
         response = flask_adapter(request=request, api_route=find_user_composer())
         if response.status_code < 300:
-            data = UserSerializer.serializer(response.body)
+            data = UsersSerializer.serializer(response.body)
             response = {"data": data}, response.status_code
         else:
             response = {

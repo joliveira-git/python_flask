@@ -8,9 +8,9 @@ from src.domain.models import Users, Pets
 class RegisterPet(RegisterPetInterface):
     """Class to define use case: Register Pet"""
 
-    def __init__(self, pet_repository:Type[PetRepository], finde_user: Type[FindUser] ):
+    def __init__(self, pet_repository:Type[PetRepository], find_user: Type[FindUser] ):
         self.__pet_repository = pet_repository
-        self.__find_user = finde_user
+        self.__find_user = find_user
 
 
     def registry(self, name: str, specie: str, user_information: Dict[int, str], age: int = None) -> Dict[bool, Pets]:
@@ -37,7 +37,6 @@ class RegisterPet(RegisterPetInterface):
         :param user_information: Dictionary with user_id and/or user_name
         :return: Dictionary with the response of find_use use case
         """
-        user_founded = None
         user_params = user_information.keys()
 
         if "user_id" in user_params and "user_name" in user_params:
