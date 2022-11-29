@@ -7,7 +7,7 @@ from src.main.serializer.pets_serializer import PetsSerializer
 
 pets_api_ns = Namespace("pets", description="pets")
 pet_fields = pets_api_ns.model(
-    "Pet", {"id": fields.Integer, "name": fields.String, "specie": fields.String, "age": fields.Integer, "user_id": fields.Integer}
+    "Pet", {"id": fields.Integer, "name": fields.String, "specie": fields.String, "age": fields.Integer, "user_information": fields.Nested}
 )
 
 class PetList(Resource):

@@ -9,12 +9,14 @@ class PetsSerializer:
     def serializer(pets: List[Pets]):
         result = []
         for pet in pets:
-            # TODO: revisar este código VVVV
             result.append(
                 {
                     "type": "pets",
                     "id": pet.id,
-                    "attributest": {"name": pet.name},
+                    "attributest": {"name": pet.name,
+                                    "specie": pet.specie,
+                                    "age": pet.age,
+                                    "user_id": pet.user_id},
                 }
             )
         return result

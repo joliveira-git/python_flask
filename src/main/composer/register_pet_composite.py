@@ -1,30 +1,19 @@
-from src.data.find_pet import FindPet
-from src.main.interface import RouteInterface
-from src.presenters.controllers import RegisterPetController, FindPetController
-from src.data.register_pet import RegisterPet
 from src.infra.repo.pet_repository import PetRepository
+from src.infra.repo.user_repository import UserRepository
+from src.data.register_pet import RegisterPet
+from src.data.find_user import FindUser
+from src.presenters.controllers import RegisterPetController
 
 
-def register_pet_composer() -> RouteInterface:
+def register_pet_composer() -> RegisterPetController:
+    """Composing Register Pet Route
+    :param - None
+    :return - Object with Register Pet Route
     """
-    Composition register pet route
-    :param None
-    :return: Object with register pet route
-    """
+
     repository = PetRepository()
-    pet_case = RegisterPet(repository)
-    register_pet_route = RegisterPetController(pet_case)
+    find_user_use_case = FindUser(UserRepository())
+    use_case = RegisterPet(repository, find_user_use_case)
+    register_pet_route = RegisterPetController(use_case)
 
     return register_pet_route
-
-def find_pet_composer() -> RouteInterface:
-    """
-    Composition register pet route
-    :param None
-    :return: Object with register pet route
-    """
-    repository = PetRepository()
-    pet_case = FindPet(repository)
-    find_pet_route = FindPetController(pet_case)
-
-    return find_pet_route
