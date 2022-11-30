@@ -13,7 +13,7 @@ class PetsSerializer:
                 {
                     "type": "pets",
                     "id": pet.id,
-                    "attributest": {"name": pet.name,
+                    "attributes": {"name": pet.name,
                                     "specie": pet.specie,
                                     "age": pet.age,
                                     "user_id": pet.user_id},

@@ -57,8 +57,7 @@ class PetRepository(PetRepositoryInterface):
 
             if filters:
                 data = db.session.query(PetsEntity).filter_by(**filters).all()
-                query_data = [data]
-            return query_data
+            return data
         except:
             db.session.rollback()
             raise

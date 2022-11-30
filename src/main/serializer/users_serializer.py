@@ -13,7 +13,7 @@ class UsersSerializer:
                 {
                     "type": "users",
                     "id": user.id,
-                    "attributest": {"name": user.name},
+                    "attributes": {"name": user.name},
                 }
             )
         return result
