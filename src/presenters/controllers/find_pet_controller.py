@@ -44,12 +44,12 @@ class FindPetController(RouteInterface):
             if response["Success"] is False:
                 https_error = HttpErrors.error_422()
                 return HttpResponse(
-                    status_code=https_error["status_code"], body=https_error["body"]
+                    status_code=https_error["status_code"], body=https_error["body"], detail="record not found"
                 )
 
-            return HttpResponse(status_code=200, body=response["Data"])
+            return HttpResponse(status_code=200, body=response["Data"], detail="record found successfully")
 
         https_error = HttpErrors.error_400()
         return HttpResponse(
-            status_code=https_error["status_code"], body=https_error["body"]
+            status_code=https_error["status_code"], body=https_error["body"], detail="invalid request message"
         )

@@ -1,9 +1,9 @@
-from flask import jsonify, request
+from flask import request
 from flask_restx import Namespace, Resource, fields
 
 from src.main.adapter import flask_adapter
-from src.main.composer import register_user_composer, find_user_composer
-from src.main.serializer.users_serializer import UsersSerializer
+from src.main.composer import register_user_composer, find_user_composer, delete_user_composer
+from src.presenters.serializer.users_serializer import UsersSerializer
 
 users_api_ns = Namespace("users", description="pets owner")
 user_fields = users_api_ns.model(
@@ -26,7 +26,8 @@ class UserList(Resource):
             response = {
                 "error": {
                     "status": response.status_code,
-                    "title": response.body["error"]
+                    "title": response.body["error"],
+                    "detail": response.detail
                 }
             }, response.status_code
 
@@ -43,7 +44,8 @@ class User(Resource):
             response = {
                 "error": {
                     "status": response.status_code,
-                    "title": response.body["error"]
+                    "title": response.body["error"],
+                    "detail": response.detail
                 }
             }, response.status_code
 
@@ -56,7 +58,21 @@ class User(Resource):
 
     def delete(self, user_id):
         """Delete an user by ID"""
-        # return delete_article(user_id)
+        response = flask_adapter(request=request, api_route=delete_user_composer())
+        if response.status_code < 300:
+            data = response.body
+            response = {"data": data}, response.status_code
+        else:
+            response = {
+                "error": {
+                    "status": response.status_code,
+                    "title": response.body["error"],
+                    "detail": response.detail
+                }
+            }, response.status_code
+
+        return response
+
 
 
 users_api_ns.add_resource(UserList, "")

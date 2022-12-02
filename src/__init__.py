@@ -9,7 +9,7 @@ def create_app(config_name=None):
 
     register_extensions(app)
 
-    from src.main.routes import api_bp
+    from src.presenters.routes import api_bp
     app.register_blueprint(api_bp, url_prefix="/api")
 
     return app

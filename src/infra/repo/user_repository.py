@@ -48,3 +48,22 @@ class UserRepository(UserRepositoryInterface):
             db.session.rollback()
             raise
         return None
+
+    @classmethod
+    def delete_user(cls, user_id: int) -> None:
+        """ insert data in user entity
+            :param id: user identification
+            :return None
+        """
+
+        try:
+            users = cls.select_user(user_id=user_id)
+            if len(users) > 0:
+                db.session.delete(users[0])
+                db.session.commit()
+                return None
+            else:
+                raise Exception("User does not exist.")
+        except:
+            db.session.rollback()
+            raise

@@ -23,9 +23,9 @@ class RegisterPetController(RouteInterface):
                 response = self.register_pet_use_case.registry(name, specie, user_information, age)
             else:
                 http_error = HttpErrors.error_422()
-                return HttpResponse(status_code=http_error["status_code"], body=http_error["body"])
+                return HttpResponse(status_code=http_error["status_code"], body=http_error["body"], detail="could not save record")
         else:
             http_error = HttpErrors.error_400()
-            return HttpResponse(status_code=http_error["status_code"], body=http_error["body"])
+            return HttpResponse(status_code=http_error["status_code"], body=http_error["body"], detail="invalid request message")
 
-        return HttpResponse(status_code=200, body=response["Data"])
+        return HttpResponse(status_code=200, body=response["Data"], detail="record found successfully")

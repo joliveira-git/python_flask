@@ -1,9 +1,9 @@
-from flask import jsonify, request
+from flask import request
 from flask_restx import Namespace, Resource, fields
 
 from src.main.adapter import flask_adapter
 from src.main.composer import register_pet_composer, find_pet_composer
-from src.main.serializer.pets_serializer import PetsSerializer
+from src.presenters.serializer.pets_serializer import PetsSerializer
 
 pets_api_ns = Namespace("pets", description="pets")
 pet_fields = pets_api_ns.model(
@@ -26,14 +26,15 @@ class PetList(Resource):
             response = {
                 "error": {
                     "status": response.status_code,
-                    "title": response.body["error"]
+                    "title": response.body["error"],
+                    "detail": response.detail
                 }
             }, response.status_code
 
         return response
 
 class Pet(Resource):
-    def get(self, pet_id):
+    def get(self):
         """Get an pet by ID"""
         response = flask_adapter(request=request, api_route=find_pet_composer())
         if response.status_code < 300:
@@ -43,7 +44,8 @@ class Pet(Resource):
             response = {
                 "error": {
                     "status": response.status_code,
-                    "title": response.body["error"]
+                    "title": response.body["error"],
+                    "detail": response.detail
                 }
             }, response.status_code
 

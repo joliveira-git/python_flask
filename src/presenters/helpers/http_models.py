@@ -12,9 +12,10 @@ class HttpRequest:
 
 class HttpResponse:
     """Class to http_response representation"""
-    def __init__(self, status_code: int, body: any):
+    def __init__(self, status_code: int, body: any, detail: any):
         self.status_code = status_code
         self.body = body
+        self.detail = detail
 
     def __repr__(self):
-        return f"HttpResponse(status_code={self.status_code}, body={self.body}"
+        return f"HttpResponse(status_code={self.status_code}, body={self.body}, detail={self.detail}"

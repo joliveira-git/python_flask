@@ -1,9 +1,9 @@
 from flask import Blueprint
 from flask_restx import Api
 
-from src.main.routes.health_check_api import health_api_ns
-from src.main.routes.user_api import users_api_ns
-from src.main.routes.pets_api import pets_api_ns
+from src.presenters.routes.health_check_api import health_api_ns
+from src.presenters.routes.user_api import users_api_ns
+from src.presenters.routes.pets_api import pets_api_ns
 
 api_bp = Blueprint("api", __name__)
 

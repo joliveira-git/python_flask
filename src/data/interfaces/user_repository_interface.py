@@ -14,3 +14,8 @@ class UserRepositoryInterface(ABC):
     def select_user(self, user_id: int = None, name: str = None) -> List[Users]:
         """abstractmethod"""
         raise Exception("Method not implemented")
+
+    @abstractmethod
+    def delete_user(self, user_id: int) -> None:
+        """abstractmethod"""
+        raise Exception("Method not implemented")

@@ -34,12 +34,12 @@ class FindUserController(RouteInterface):
             if response["Success"] is False:
                 http_error = HttpErrors.error_422()
                 return HttpResponse(
-                    status_code=http_error["status_code"], body=http_error["body"]
+                    status_code=http_error["status_code"], body=http_error["body"], detail="record not found"
                 )
 
-            return HttpResponse(status_code=200, body=response["Data"])
+            return HttpResponse(status_code=200, body=response["Data"], detail="record found successfully")
 
         http_error = HttpErrors.error_400()
         return HttpResponse(
-            status_code=http_error["status_code"], body=http_error["body"]
+            status_code=http_error["status_code"], body=http_error["body"], detail="invalid request message"
         )
