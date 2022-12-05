@@ -3,3 +3,4 @@ from .register_pet_composite import register_pet_composer
 from .find_pet_composite import find_pet_composer
 from .find_user_composite import find_user_composer
 from .delete_user_composite import delete_user_composer
+from .delete_pet_composite import delete_pet_composer

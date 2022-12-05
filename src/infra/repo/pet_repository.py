@@ -3,8 +3,8 @@ from typing import List
 from src import db
 from src.data.interfaces import PetRepositoryInterface
 from src.domain.models import Pets
-from src.infra.config import DBConnectionHandler
 from src.infra.entities import Pets as PetsEntity
+
 
 class PetRepository(PetRepositoryInterface):
     """Class tom manage Pet Repository"""
@@ -19,7 +19,6 @@ class PetRepository(PetRepositoryInterface):
         :param user_id: id of the owner (FK)
         :return tuple with new pet inserted
         """
-
 
         try:
             new_pet = PetsEntity(name=name, specie=specie, age=age, user_id=user_id)
@@ -62,3 +61,22 @@ class PetRepository(PetRepositoryInterface):
             db.session.rollback()
             raise
         return None
+
+    @classmethod
+    def delete_pet(cls, pet_id: int) -> None:
+        """ delete pet registers
+            :param pet_id: pet identification
+            :return None
+        """
+
+        try:
+            pets = cls.select_pet(pet_id=pet_id)
+            if len(pets) > 0:
+                db.session.delete(pets[0])
+                db.session.commit()
+                return None
+            else:
+                raise Exception("Pet does not exist.")
+        except:
+            db.session.rollback()
+            raise

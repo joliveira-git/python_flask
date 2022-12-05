@@ -7,7 +7,7 @@ from src.presenters.controllers import DeleteUserController
 
 def delete_user_composer() -> RouteInterface:
     """
-    Composition register user route
+    Composition delete user route
     :param None
     :return: None
     """

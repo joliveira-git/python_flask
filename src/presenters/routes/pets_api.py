@@ -2,7 +2,7 @@ from flask import request
 from flask_restx import Namespace, Resource, fields
 
 from src.main.adapter import flask_adapter
-from src.main.composer import register_pet_composer, find_pet_composer
+from src.main.composer import register_pet_composer, find_pet_composer, delete_pet_composer
 from src.presenters.serializer.pets_serializer import PetsSerializer
 
 pets_api_ns = Namespace("pets", description="pets")
@@ -58,7 +58,20 @@ class Pet(Resource):
 
     def delete(self, pet_id):
         """Delete an pet by ID"""
-        # return delete_article(pet_id)
+        response = flask_adapter(request=request, api_route=delete_pet_composer())
+        if response.status_code < 300:
+            data = response.body
+            response = {"data": data}, response.status_code
+        else:
+            response = {
+                "error": {
+                    "status": response.status_code,
+                    "title": response.body["error"],
+                    "detail": response.detail
+                }
+            }, response.status_code
+
+        return response
 
 
 pets_api_ns.add_resource(PetList, "")

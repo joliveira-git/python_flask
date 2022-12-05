@@ -3,3 +3,4 @@ from .find_user import FindUser
 from .find_pet import FindPet
 from .register_pet import RegisterPet
 from .delete_user import DeleteUser
+from .delete_pet import DeletePet

@@ -51,8 +51,8 @@ class UserRepository(UserRepositoryInterface):
 
     @classmethod
     def delete_user(cls, user_id: int) -> None:
-        """ insert data in user entity
-            :param id: user identification
+        """ delete user register
+            :param user_id: user identification
             :return None
         """
 
